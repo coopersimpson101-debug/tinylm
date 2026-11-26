@@ -138,10 +138,35 @@ def test_grad_accumulation_equals_big_batch():
     oa = optim.AdamW(optim.param_groups(a, 0.0), lr=1e-3)
     ob = optim.AdamW(optim.param_groups(b, 0.0), lr=1e-3)
     off = optim.LossScaler(False)
-    train_step(a, oa, off, [(x, x)], 1e-3, 1.0)
-    train_step(b, ob, off, [(x[:2], x[:2]), (x[2:], x[2:])], 1e-3, 1.0)
-    for p, q in zip(a.parameters(), b.parameters()):
-        assert torch.allclose(p, q, atol=1e-6)
+    lr = 1e-3
+    # clip=0 (off): global-norm clipping and Adam's scale invariance would both hide a wrongly
+    # scaled accumulated gradient, so the raw gradients are compared.
+    train_step(a, oa, off, [(x, x)], lr, 0.0)
+    train_step(b, ob, off, [(x[:2], x[:2]), (x[2:], x[2:])], lr, 0.0)
+    # 1. The thing accumulation must get right is the gradient. One batch of 4 and two accumulated
+    #    halves (each loss / 2) are the same sum in a different floating-point order, so they agree
+    #    to a few fp32 ulps of the tensor's scale (measured: <= 4.2e-7 relative). 1e-5 relative leaves
+    #    margin for other BLAS libraries, while any real bug (a missing / n, a dropped micro-batch,
+    #    grads zeroed between micro-batches) is off by O(1) relative -- checked in 3.
+    for (name, p), q in zip(a.named_parameters(), b.parameters()):
+        scale = p.grad.abs().max()
+        assert (p.grad - q.grad).abs().max() <= 1e-5 * scale + 1e-12, name
+    # 2. Parameters after the AdamW step. Adam's first update is lr * g / (|g| + eps), which is
+    #    extremely sensitive to rounding where |g| is near eps = 1e-8: a 1e-10 change in a 1e-9
+    #    gradient moves the update by ~8e-6 (= 0.8 % of lr). That is why a blanket atol=1e-6 on the
+    #    parameters failed on macOS while the gradients matched. Compare only where |g| >= 100 eps;
+    #    there the update moves by at most ~lr * rel_grad_err, i.e. far below 1e-7.
+    for (name, p), q in zip(a.named_parameters(), b.parameters()):
+        well_conditioned = p.grad.abs() >= 1e-6
+        assert torch.allclose(p[well_conditioned], q[well_conditioned], rtol=0, atol=1e-7), name
+        assert (p - q).abs().max() <= 2 * lr  # everywhere: bounded by the size of one Adam step
+    # 3. The check has teeth: dropping one micro-batch changes the gradient by O(1).
+    grads = []
+    for batches in ([(x, x)], [(x[:2], x[:2])]):  # same initial weights, no clipping, lr = 0
+        c = small()
+        train_step(c, optim.AdamW(optim.param_groups(c, 0.0), lr=0.0), off, batches, 0.0, 0.0)
+        grads.append(c.layers[0].mlp.down.weight.grad)
+    assert (grads[0] - grads[1]).abs().max() > 0.1 * grads[0].abs().max()
 
 
 def _cfg(d, out, **kw):
