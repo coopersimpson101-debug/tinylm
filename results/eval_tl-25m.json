@@ -1,0 +1,44 @@
+{
+  "checkpoint": "tl-25m",
+  "n_params": 25707008,
+  "device": "cuda",
+  "perplexity": {
+    "loss": 1.5356352051058242,
+    "ppl": 4.644274660180508,
+    "tokens": 5471744
+  },
+  "story_cloze": {
+    "n": 500,
+    "acc": 0.624,
+    "acc_norm": 0.784,
+    "chance": 0.25
+  },
+  "grammar": {
+    "n": 204,
+    "acc": 0.9950980392156863,
+    "chance": 0.5,
+    "by_phenomenon": {
+      "agreement_sg": 1.0,
+      "agreement_pl": 1.0,
+      "a_an": 1.0,
+      "pronoun_gender": 1.0,
+      "past_tense": 1.0,
+      "reflexive": 0.9375
+    }
+  },
+  "samples": [
+    {
+      "prompt": "Once upon a time,",
+      "text": "Once upon a time, there was a little boy named Tim. Tim loved to play with his toys. One day, Tim found a big box of junk in his room. He did not know what was inside. Tim wanted to know what was inside the box.\nTim opened the box and found a lot of junk. There were balls, dolls, and balls. Tim was very happy. He wanted to play with the junk right away. Tim opened the box and saw something fun. It was a toy car. Tim played with the car all day.\nAt night, Tim's mom was not looking. She gave him a big hug and made Tim happy. She gave him a big hug and said, \"Goodnight, Tim. We will play with the junk again soon.\" Tim learned that he could be a good"
+    },
+    {
+      "prompt": "Lily wanted to play outside, but",
+      "text": "Lily wanted to play outside, but when she looked out of the window, she saw something amazing. \"What is that?\" she asked. It was a big window and an unknown building made of bricks.\nLily was curious, so she went outside. She found a big, green brick and a small, white stripes, and a shiny white one that was the perfect toilet. She reached out and touched it.\nSuddenly, a small bird flew by. The bird flew down at her and said, \"I'm so excited you see me! I'm going to take this brick!\" Lily was surprised, but she said yes! The bird flew away, and the brick was safe.\nLily was so happy and surprised to find the brick was the best toy ever. She played with it for hours and"
+    },
+    {
+      "prompt": "Tom found a small box. Inside",
+      "text": "Tom found a small box. Inside the box, he saw a big, furry dog. The dog was trying to walk and play, but Tom knew he should not go in. He was very scared, but he listened to his mom and dad.\nTom tried to walk in the box, but it was too big. At first, he could not go inside. He did not know what to do. Then, he had an idea. He went to a pond full of water and filled a tiny pool. Now, Tom could play in the water with his new friend, the brown dog.\nAfter a while, the dog was done. Tom was happy he could play in the pool. He said goodbye to his new friend and went home. Tom knew that the dog and the brown dog had a fun day in the box."
+    }
+  ],
+  "seconds": 156.9
+}

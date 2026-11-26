@@ -1,0 +1,8 @@
+{
+  "n_tokens": 46,
+  "logit_std": 2.7301097935592575,
+  "max_abs_diff_numpy_ref": 8.38560081461992e-06,
+  "max_abs_diff_c_engine": 7.62939453125e-06,
+  "argmax_agreement_c_engine": 1.0,
+  "c_tokenizer_matches": true
+}

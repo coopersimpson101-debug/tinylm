@@ -1,0 +1,23 @@
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# data, checkpoints and exported models (large; regenerate with the commands in README)
+data/
+runs/
+*.pt
+*.gguf
+*.bin
+tinyinfer/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+.ruff_cache/

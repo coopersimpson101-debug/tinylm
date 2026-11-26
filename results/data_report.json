@@ -1,0 +1,45 @@
+{
+  "inputs": {
+    "train": "tinystories-train.txt",
+    "valid": "tinystories-valid.txt"
+  },
+  "train": {
+    "documents_in": 1220482,
+    "filtered": {
+      "length": 101,
+      "english": 7,
+      "repetition": 2
+    },
+    "passed_filters": 1220372,
+    "exact_duplicates": 0,
+    "near_duplicates": 0,
+    "lsh_candidates": 2244,
+    "exact_overlap_with_train": 0,
+    "documents_kept": 1220372,
+    "tokens": 243301065,
+    "shards": 8
+  },
+  "valid": {
+    "documents_in": 27631,
+    "filtered": {
+      "length": 1,
+      "repetition": 1
+    },
+    "passed_filters": 27629,
+    "exact_duplicates": 0,
+    "near_duplicates": 0,
+    "lsh_candidates": 4,
+    "exact_overlap_with_train": 0,
+    "documents_kept": 27629,
+    "tokens": 5471746,
+    "shards": 1
+  },
+  "tokenizer": {
+    "vocab_size": 4096,
+    "merges": 3837,
+    "train_chars": 99617633,
+    "distinct_pretokens": 22509,
+    "seconds": 3.2
+  },
+  "seconds": 156.1
+}

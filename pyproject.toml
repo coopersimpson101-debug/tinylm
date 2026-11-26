@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinylm"
+version = "0.1.0"
+description = "Train a small Qwen2-architecture LLM from scratch: data cleaning, BPE, pretraining, evaluation, GGUF export"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "the tinylm authors" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "torch>=2.1"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Education",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["llm", "pretraining", "bpe", "minhash", "gguf", "qwen2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "regex>=2024.0", "matplotlib>=3.8"]
+
+[project.urls]
+Homepage = "https://github.com/coopersimpson101-debug/tinylm"
+Repository = "https://github.com/coopersimpson101-debug/tinylm"
+Issues = "https://github.com/coopersimpson101-debug/tinylm/issues"
+Changelog = "https://github.com/coopersimpson101-debug/tinylm/blob/main/CHANGELOG.md"
+
+[project.scripts]
+tinylm-download = "tinylm.download:main"
+tinylm-prepare = "tinylm.prepare:main"
+tinylm-train = "tinylm.train:main"
+tinylm-eval = "tinylm.evaluate:main"
+tinylm-export = "tinylm.export:main"
+
+[tool.setuptools]
+packages = ["tinylm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "tinylm: training a small Qwen2-architecture language model from scratch"
+abstract: "Data cleaning with MinHash dedup, a byte-level BPE trainer, a hand-written Qwen2 decoder, AdamW and training loop in PyTorch, zero-shot evaluation, and GGUF export for the tinyinfer C engine."
+authors:
+  - name: "the tinylm authors"
+version: 0.1.0
+date-released: 2026-11-26
+license: MIT
+repository-code: "https://github.com/coopersimpson101-debug/tinylm"
+keywords:
+  - llm
+  - pretraining
+  - tokenizer
+  - bpe
+  - minhash
+  - gguf
+  - speculative-decoding

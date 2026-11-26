@@ -1,0 +1,41 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: coopersimpson101-debug/tinyinfer
+          path: tinyinfer
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install (CPU PyTorch)
+        run: |
+          python -m pip install --upgrade pip
+          if [ "$RUNNER_OS" = Linux ]; then
+            pip install torch --index-url https://download.pytorch.org/whl/cpu
+          else
+            pip install torch
+          fi
+          pip install -e ".[dev]"
+      - name: Build tinyinfer (for the logits-parity tests)
+        run: cd tinyinfer && python build.py --portable --only lib
+      - name: Tests
+        env:
+          TINYINFER_DIR: ${{ github.workspace }}/tinyinfer
+        run: python -m pytest -q tests
+      - name: Figures regenerate from committed results
+        run: python docs/assets/make_figures.py
+      - name: Package builds
+        run: pip install build && python -m build

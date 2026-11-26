@@ -1,0 +1,30 @@
+{
+  "tinystories/train": {
+    "url": "https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-train.txt",
+    "bytes": 1000000000,
+    "sha256": "a878faf82bf7eec1a0c41b6c34055fe679c6dd458f6f99ca727e62e46d2a45ba",
+    "range": [
+      0,
+      999999999
+    ],
+    "seconds": 95.6,
+    "license": "CDLA-Sharing-1.0",
+    "paper": "Eldan & Li 2023, arXiv:2305.07759",
+    "repo": "roneneldan/TinyStories",
+    "file": "TinyStoriesV2-GPT4-train.txt"
+  },
+  "tinystories/valid": {
+    "url": "https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-valid.txt",
+    "bytes": 22502601,
+    "sha256": "6874bae9a4c1a4e7edcf0e53b86c17817e9cf881fc75ff2368da457b80c0585d",
+    "range": [
+      0,
+      22502600
+    ],
+    "seconds": 3.3,
+    "license": "CDLA-Sharing-1.0",
+    "paper": "Eldan & Li 2023, arXiv:2305.07759",
+    "repo": "roneneldan/TinyStories",
+    "file": "TinyStoriesV2-GPT4-valid.txt"
+  }
+}
